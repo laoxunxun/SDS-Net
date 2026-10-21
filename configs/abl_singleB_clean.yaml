@@ -1,8 +1,0 @@
-# C4 容量对照 (关键实验): 1×Swin-Base 全部8波段 + 强解码器, 无桥无FROB无分组。
-# 参数量 ~87M ≈ SDS-Net 双通路 88.7M —— 控制"分离 vs 整体"比较中的容量混淆。
-# 与 abl_single_clean (Swin-S 48.8M) 同配方, 仅换骨干; PGSA保持, 与 exp34 可比。
-seed: 42
-data: {root: "G:/MCOD", size: 384, cache: "G:/MCOD/cache352", multiscale: true, physics_aug: true}
-model: {type: plain, backbone_type: swin, backbone: swin_base_patch4_window7_224, pretrained: true, decoder: strong, grad_ckpt: true}
-train: {batch: 8, workers: 4, lr: 1.0e-4, epochs: 300, eval_interval: 15}
-loss: {l_iou: 1.0, l_edge: 0.5, l_opp: 0.0, l_phys: 0.0, l_ds: 0.5, l_ssim: 1.0, weighted: true}

@@ -1,5 +1,0 @@
-seed: 42
-data: {root: "G:/MCOD", size: 352, cache: "G:/MCOD/cache352", train_subset: 512}
-model: {type: plain, backbone: resnet50, pretrained: true}
-train: {batch: 8, workers: 4, lr: 1.0e-4, epochs: 100, eval_interval: 10}
-loss: {l_iou: 1.0, l_edge: 0.0, l_opp: 0.0, l_phys: 0.0}

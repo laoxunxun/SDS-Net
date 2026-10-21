@@ -97,9 +97,7 @@ def build(cfg):
         from plain_net import PlainNet
         return PlainNet(in_bands=8, backbone_arch=cfg["backbone"], pretrained=False,
                         decoder=cfg["decoder"], backbone_type=cfg["backbone_type"], img_size=384)
-    sys.path.insert(0, os.path.join(HERE, "compare"))
-    from compare_adapter import CompareWrapper
-    return CompareWrapper(cfg, pretrained=False, img_size=384)
+    raise ValueError(f"Unknown model spec: {cfg}")
 
 
 def find_ckpt(cands):

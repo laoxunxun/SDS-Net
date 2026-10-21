@@ -1,9 +1,0 @@
-# E7 (m4 对照): N 组(725-887nm)不继承 ImageNet RGB 预训练, 从零初始化。
-# 与 exp37_prior (最终模型, NV 流继承 RGB 3 通道预训练) 同配方, 仅 nv_pretrained: false。
-# 回答: 3 波段 NV 沿用 ~600nm 红通道滤波器初始化是否有效, 还是随机初始化同样可行。
-# 本地 4070 8GB 可跑 (grad_ckpt: true)。
-seed: 42
-data: {root: "G:/MCOD", size: 384, cache: "G:/MCOD/cache352", multiscale: true, physics_aug: true}
-model: {type: sds, v_arch: swin_small_patch4_window7_224, nv_arch: swin_tiny_patch4_window7_224, pretrained: true, grad_ckpt: true, use_prior: true, nv_pretrained: false}
-train: {batch: 8, workers: 4, lr: 1.0e-4, epochs: 300, eval_interval: 15}
-loss: {l_iou: 1.0, l_edge: 0.5, l_opp: 0.0, l_phys: 0.0, l_ds: 0.5, l_ssim: 1.0, weighted: true}

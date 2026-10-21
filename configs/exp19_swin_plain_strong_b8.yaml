@@ -1,5 +1,0 @@
-seed: 42
-data: {root: "G:/MCOD", size: 352, cache: "G:/MCOD/cache352"}
-model: {type: plain, backbone_type: swin, pretrained: true, decoder: strong}   # Swin-Tiny Transformer + strong decoder
-train: {batch: 8, workers: 4, lr: 1.0e-4, epochs: 100, eval_interval: 5}
-loss: {l_iou: 1.0, l_edge: 0.0, l_opp: 0.0, l_phys: 0.0, l_ds: 0.0}

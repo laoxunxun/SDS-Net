@@ -72,9 +72,7 @@ def build(name):
         from models.plain_net import PlainNet
         return PlainNet(in_bands=8, backbone_arch="swin_base_patch4_window7_224",
                         pretrained=False, decoder="strong", backbone_type="swin", img_size=384)
-    sys.path.insert(0, os.path.join(ROOT, "compare"))
-    from compare_adapter import CompareWrapper
-    return CompareWrapper(name, pretrained=False, img_size=384)
+    raise ValueError(f"Unknown model: {name}")
 
 def _sds():
     from sds_net import SDSNet

@@ -13,8 +13,8 @@ multispectral camouflaged object detection (MCOD) that pairs **clean accuracy** 
 
 ## News
 
-- **[2026-10]** Code and unified evaluation protocol released. Weights will be published in
-  the [Releases](../../releases) section upon paper acceptance.
+- **[2026-10]** Code released. Trained weights are available via the link in the
+  [Model Zoo](#model-zoo) section.
 
 ## Highlights
 
@@ -54,8 +54,8 @@ pretrained weights download automatically on first run.
 ## Data
 
 Download the MCOD benchmark (8-band multispectral camouflaged scenes) from the official
-release of the benchmark authors: **https://github.com/hu-xh/PRNet** (dataset download
-links are in that repository's README). Arrange the data as:
+release of the benchmark authors: **https://github.com/yl2900260-bit/MCOD**. Arrange the
+data as:
 
 ```
 <MCOD_ROOT>/
@@ -83,8 +83,7 @@ python run_experiment.py --name sds_s123 --config configs/exp34_s123.yaml
 ```
 
 The three paper seeds are `configs/exp34_s123.yaml`, `configs/exp40_prior_seed2.yaml`, and
-`configs/exp41_prior_seed7.yaml`. Ablation configs (`abl_*.yaml`, `exp*.yaml`) live in
-[configs/](configs/).
+`configs/exp41_prior_seed7.yaml`.
 
 ## Evaluation
 
@@ -94,26 +93,20 @@ python smooth_degrad_eval.py
 
 # Sensor-level stress test (Poisson shot noise, saturation, defocus)
 python sensor_noise_eval.py
-
-# Per-image S-measure, win rates and Wilcoxon significance
-python winrate_eval.py
-
-# Architecture robustness table / stratified (area, N-contrast) analysis
-python robustness_eval.py
-python stratified_eval.py
 ```
 
 ## Model Zoo
 
 | Weights | Config | Sm | Link |
 |---|---|---|---|
-| SDS-Net (seed 123) | `configs/exp34_s123.yaml` | 0.8670 | [release, upon acceptance] |
-| SDS-Net (seed 2) | `configs/exp40_prior_seed2.yaml` | – | [release, upon acceptance] |
-| SDS-Net (seed 7) | `configs/exp41_prior_seed7.yaml` | – | [release, upon acceptance] |
-| SDS-Net (3-seed set) | – | 0.8648 ± 0.0019 | above, all three |
+| SDS-Net (seed 123) | `configs/exp34_s123.yaml` | 0.8670 | [Baidu Netdisk](https://pan.baidu.com/s/1fsWE-fSl2oR2W-Wxp7nlkQ?pwd=pxqj) |
+| SDS-Net (seed 2) | `configs/exp40_prior_seed2.yaml` | – | same |
+| SDS-Net (seed 7) | `configs/exp41_prior_seed7.yaml` | – | same |
+| SDS-Net (3-seed set) | – | 0.8648 ± 0.0019 | same |
 
-Place downloaded `best.pth` files under `experiments/<exp_name>/best.pth`
-(e.g. `experiments/exp34_s123/best.pth`).
+All three checkpoints (`sdsnet_seed123.pth`, `sdsnet_seed2.pth`, `sdsnet_seed7.pth`) are
+in the shared folder above (access code: `pxqj`). Place them under
+`experiments/<exp_name>/best.pth` (e.g. `experiments/exp34_s123/best.pth`).
 
 ## Repository Layout
 
@@ -121,19 +114,12 @@ Place downloaded `best.pth` files under `experiments/<exp_name>/best.pth`
 SDS-Net/
 ├── run_experiment.py     # training / evaluation entry point
 ├── losses.py             # multi-term loss (IoU / edge / structure)
-├── models/               # SDS-Net, bridge, decoders, backbones, ablation variants
+├── models/               # SDS-Net architecture (encoders, bridge, decoders)
 ├── shared/               # dataset (MCOD 8-band loader), engine, metrics, utils
-├── configs/              # paper configs: main seeds + ablations
+├── configs/              # the three paper seeds
 ├── build_cache.py        # MCOD fast-cache builder
 ├── smooth_degrad_eval.py # degradation evaluation (hard / smooth / joint)
-├── sensor_noise_eval.py  # sensor-level stress test
-├── winrate_eval.py       # per-image win rates + Wilcoxon tests
-├── robustness_eval.py    # architecture robustness table
-├── stratified_eval.py    # stratified analysis by target area / N-contrast
-├── sig_test.py           # significance tests
-├── em_calibration.py     # logit-temperature E-measure calibration
-├── aggregate_seeds.py    # aggregate multi-seed results
-└── bench_timing.py       # latency benchmark
+└── sensor_noise_eval.py  # sensor-level stress test
 ```
 
 ## Citation
@@ -141,11 +127,11 @@ SDS-Net/
 If you find this work useful, please cite:
 
 ```bibtex
-@article{sdsnet2026,
+@misc{sdsnet2026,
   title   = {Physics-Guided Multispectral Camouflaged Object Detection with Degradation Robustness},
   author  = {Sun, Haoran and Qu, Jue and Wang, Wei and Liu, Haiping and Zhou, Hengfei and Yang, Bo},
-  journal = {IEEE Transactions on Multimedia},
-  year    = {2026}
+  year    = {2026},
+  note    = {Citation will be updated upon publication}
 }
 ```
 

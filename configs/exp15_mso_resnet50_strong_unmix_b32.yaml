@@ -1,5 +1,0 @@
-seed: 42
-data: {root: "G:/MCOD", size: 352, cache: "G:/MCOD/cache352"}
-model: {type: mso, backbone: resnet50, pretrained: true, decoder: strong, antagonistic_stem: false, physics: unmix, unmix_k: 5}
-train: {batch: 32, workers: 4, lr: 1.0e-4, epochs: 100, eval_interval: 5}
-loss: {l_iou: 1.0, l_edge: 1.0, l_opp: 0.0, l_phys: 0.5, l_ds: 1.0}

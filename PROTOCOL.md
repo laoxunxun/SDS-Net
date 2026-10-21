@@ -31,8 +31,8 @@ Seeds for SDS-Net: 123 / 2 / 7 (`configs/exp34_s123.yaml`, `configs/exp40_prior_
 
 - Metrics via [py_sod_metrics](https://github.com/lartpang/py_sod_metrics):
   MAE, S-measure, mean/max E-measure, weighted F_β, F_β.
-- Per-image S-measure for win rates is computed image-by-image
-  (`winrate_eval.py`), paired Wilcoxon signed-rank test for significance.
+- Per-image S-measure for win rates is computed image-by-image, with paired
+  Wilcoxon signed-rank tests for significance.
 
 ## 4. V-band degradation conditions
 
@@ -62,5 +62,5 @@ normalized input format, band count, resolution, and output sigmoid into one int
 - Every table row states its protocol (P-clean / P-leaky).
 - Capacity controls (Swin-B / Swin-S single-pathway) are trained with the same recipe and
   reported separately from monolithic 8-band adaptations.
-- Cross-group robustness claims are backed by Wilcoxon tests over per-image losses
-  (`sig_test.py`), with p-values reported in the paper.
+- Cross-group robustness claims are backed by Wilcoxon tests over per-image losses,
+  with p-values reported in the paper.

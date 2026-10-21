@@ -21,7 +21,7 @@ EXP_ROOT = os.path.join(ROOT, "experiments")
 
 
 def build_model(cfg):
-    cm = cfg["model"]; mt = cm.get("type", "mso")
+    cm = cfg["model"]; mt = cm.get("type", "sds")
     arch = cm.get("backbone", "resnet34"); pre = cm.get("pretrained", True)
     if mt == "plain":
         from plain_net import PlainNet
@@ -30,9 +30,6 @@ def build_model(cfg):
                         backbone_type=cm.get("backbone_type", "resnet"),
                         img_size=cfg.get("data", {}).get("size", 352),
                         grad_ckpt=cm.get("grad_ckpt", False))
-    if mt == "sldp":
-        from sldp_net import SLDPNet
-        return SLDPNet(backbone_arch=arch, pretrained=pre)
     if mt == "sds":
         from sds_net import SDSNet
         return SDSNet(v_arch=cm.get("v_arch", "swin_tiny_patch4_window7_224"),
@@ -45,33 +42,7 @@ def build_model(cfg):
                       grad_ckpt=cm.get("grad_ckpt", False),
                       v_pretrained=cm.get("v_pretrained", None),
                       nv_pretrained=cm.get("nv_pretrained", None))
-    if mt == "dasa":
-        from dasa_net import DASANet
-        return DASANet(v_arch=cm.get("v_arch", "swin_small_patch4_window7_224"),
-                       pretrained=pre, img_size=cfg.get("data", {}).get("size", 384),
-                       nv_base=cm.get("nv_base", 32))
-    if mt == "sba":
-        from physics_net import PhysicsNet
-        return PhysicsNet(band_split=cm.get("band_split", "vn"),
-                          gate_source=cm.get("gate_source", "div"),
-                          alignment=cm.get("alignment", "div"), pretrained=pre,
-                          img_size=cfg.get("data", {}).get("size", 384),
-                          grad_ckpt=cm.get("grad_ckpt", True))
-    if mt == "sfc":
-        from sfc_net import SFCBNet
-        return SFCBNet(arch=cm.get("v_arch", "swin_small_patch4_window7_224"),
-                       pretrained=pre, img_size=cfg.get("data", {}).get("size", 384))
-    if mt == "compare":
-        sys.path.insert(0, os.path.join(os.path.dirname(__file__), "compare"))
-        from compare_adapter import CompareWrapper
-        return CompareWrapper(model_name=cm.get("compare_model", "FEDER"),
-                              pretrained=pre, img_size=cfg.get("data", {}).get("size", 384))
-    from mso_net import MSONet
-    return MSONet(in_bands=8, receptors=cm.get("receptors", 6), num_indices=cm.get("num_indices", 4),
-                  backbone_arch=arch, pretrained=pre, decoder=cm.get("decoder", "boundary"),
-                  antagonistic_stem=cm.get("antagonistic_stem", True),
-                  physics=cm.get("physics", "bio"), unmix_k=cm.get("unmix_k", 5))
-
+    raise ValueError(f"Unknown model type: {mt}")
 
 def evaluate_full(model, ds, gt_dir, preds_dir, dev):
     from shared.dataset import load_mask

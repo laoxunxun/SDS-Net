@@ -1,7 +1,0 @@
-# B1a: single-pathway baseline — 1x Swin-Small on all 8 bands, strong decoder, NO bridge/FROB.
-# vs exp29 (dual Small+Tiny + bridge + FROB = full SDS) = total architecture contribution.
-seed: 42
-data: {root: "G:/MCOD", size: 384, cache: "G:/MCOD/cache352", multiscale: true}
-model: {type: plain, backbone_type: swin, backbone: swin_small_patch4_window7_224, pretrained: true, decoder: strong}
-train: {batch: 8, workers: 4, lr: 1.0e-4, epochs: 300, eval_interval: 15}
-loss: {l_iou: 1.0, l_edge: 0.5, l_opp: 0.0, l_phys: 0.0, l_ds: 0.5, l_ssim: 1.0, weighted: true}
