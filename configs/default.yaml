@@ -1,0 +1,26 @@
+seed: 42
+
+data:
+  root: "G:/MCOD"
+  size: 352            # COD standard train/eval resolution; cube & mask resized to this
+  cache: "G:/MCOD/cache352"   # pre-decoded fast cache (build once: python mso-net/build_cache.py)
+
+model:
+  backbone: resnet34   # SMALL central net (thesis): resnet18(最轻,8GB轻松)/resnet34/resnet50
+  receptors: 6         # number of stomatopod spectral receptors (=> P=15 opponent pairs)
+  num_indices: 4       # number of learnable spectral indices (LPSI)
+  pretrained: true     # ImageNet weights for body(layer1-4); DOC stem is fresh by design
+
+train:
+  batch: 8
+  workers: 4
+  lr: 1.0e-4
+  epochs: 100
+  eval_interval: 5    # eval on test set every N epochs (saves time)
+
+# MSOLoss weights
+loss:
+  l_iou: 1.0
+  l_edge: 1.0
+  l_opp: 0.1
+  l_phys: 0.5      # physics-consistency: aux head predicts local-spectral-contrast saliency

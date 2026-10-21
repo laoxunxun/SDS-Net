@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Weights & experiment outputs (weights go to GitHub Releases, not git)
+*.pth
+*.pt
+*.ckpt
+ckpt/
+experiments/
+eval/preds/
+
+# Data (MCOD dataset must be downloaded separately)
+data/
+cache*/
+
+# IDE / OS
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
+
+# Logs
+*.log

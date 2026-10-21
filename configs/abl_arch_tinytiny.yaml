@@ -1,0 +1,8 @@
+# B1b: dual-pathway capacity-matched — Swin-Tiny(V) + Swin-Tiny(NV) + bridge + FROB.
+# Backbone ~56M vs single Small ~50M: isolates the V/NV disentanglement from capacity.
+# If B1b > B1a (single Small) at matched capacity => dual-pathway design is real, not just more params.
+seed: 42
+data: {root: "G:/MCOD", size: 384, cache: "G:/MCOD/cache352", multiscale: true}
+model: {type: sds, v_arch: swin_tiny_patch4_window7_224, nv_arch: swin_tiny_patch4_window7_224, pretrained: true}
+train: {batch: 8, workers: 4, lr: 1.0e-4, epochs: 300, eval_interval: 15}
+loss: {l_iou: 1.0, l_edge: 0.5, l_opp: 0.0, l_phys: 0.0, l_ds: 0.5, l_ssim: 1.0, weighted: true}

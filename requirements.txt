@@ -1,0 +1,9 @@
+torch>=2.1
+torchvision
+timm
+pyyaml
+numpy
+scipy
+pillow
+matplotlib
+py_sod_metrics

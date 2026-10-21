@@ -1,0 +1,5 @@
+seed: 42
+data: {root: "G:/MCOD", size: 384, cache: "G:/MCOD/cache352", multiscale: true, physics_aug: true}
+model: {type: sds, v_arch: swin_small_patch4_window7_224, nv_arch: swin_tiny_patch4_window7_224, pretrained: true, grad_ckpt: true, use_bridge: false}
+train: {batch: 8, workers: 4, lr: 1.0e-4, epochs: 300, eval_interval: 15}
+loss: {l_iou: 1.0, l_edge: 0.5, l_opp: 0.0, l_phys: 0.0, l_ds: 0.5, l_ssim: 1.0, weighted: true}

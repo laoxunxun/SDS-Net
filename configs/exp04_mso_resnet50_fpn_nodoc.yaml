@@ -1,0 +1,5 @@
+seed: 42
+data: {root: "G:/MCOD", size: 352, cache: "G:/MCOD/cache352"}
+model: {type: mso, backbone: resnet50, pretrained: true, decoder: plain, antagonistic_stem: false, receptors: 6, num_indices: 4}
+train: {batch: 8, workers: 4, lr: 1.0e-4, epochs: 100, eval_interval: 5}
+loss: {l_iou: 1.0, l_edge: 0.0, l_opp: 0.1, l_phys: 0.5}   # = exp03 + ONLY physics terms (clean isolation)
